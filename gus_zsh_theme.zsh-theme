@@ -9,7 +9,7 @@ function conda_info {
 # content around '' is updated every time, but around "" is not
 PROMPT='
 
-%{$fg_bold[cyan]%}⦿%{$reset_color%} %{$fg[magenta]%}%2d%{$reset_color%} $(git_prompt_info)$(conda_info)
+%{$fg_bold[cyan]%}⦿%{$reset_color%} %{$fg[magenta]%}.../%2d%{$reset_color%} $(git_prompt_info)$(conda_info)
 %(?:%{$fg_bold[green]%}⦿ :%{$fg_bold[red]%}⦿ )%{$reset_color%}'
 
 
@@ -41,7 +41,7 @@ zle-line-init() {
 
     local saved_prompt=$PROMPT
     local saved_rprompt=$RPROMPT
-    PROMPT="${FG[237]}\${(l.\${COLUMNS}..·.)}%{$reset_color%}"
+    PROMPT="${FG[235]}\${(l.\${COLUMNS}..·.)}%{$reset_color%}"
     PROMPT+='
 %(?:%{$fg[green]%}〉:%{$fg_bold[red]%}>> )%{$reset_color%}'
     RPROMPT=''
