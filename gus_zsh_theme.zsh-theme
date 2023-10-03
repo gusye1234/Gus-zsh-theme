@@ -1,14 +1,16 @@
 function conda_info {
-    if [[ -n "$CONDA_DEFAULT_ENV" ]]; then
-        echo "%{$fg[green]%}‹${CONDA_DEFAULT_ENV}›%{$reset_color%}"
+    # return python path father, usually it unifies the conda, venv and virtualenv
+    if [[ -n `command -v python` ]]; then
+        echo "%{$fg[green]%}‹$(basename $(dirname $(dirname `which python`)))›%{$reset_color%}"
     fi
 }
 
 # PROMPT="${FG[237]}\${(l.\${COLUMNS}..·.)}%{$reset_color%}"
 # content around '' is updated every time, but around "" is not
 PROMPT='
-%{$fg_bold[cyan]%}·%{$reset_color%} %{$fg[magenta]%}%2d%{$reset_color%} $(git_prompt_info)$(conda_info)
-%(?:%{$fg_bold[green]%}〉:%{$fg_bold[red]%}〉)%{$reset_color%}'
+
+%{$fg_bold[cyan]%}⦿%{$reset_color%} %{$fg[magenta]%}%2d%{$reset_color%} $(git_prompt_info)$(conda_info)
+%(?:%{$fg_bold[green]%}⦿ :%{$fg_bold[red]%}⦿ )%{$reset_color%}'
 
 
 # %(?:%{$fg_bold[green]%}↪ :%{$fg_bold[red]%}↪ )%{$reset_color%}
