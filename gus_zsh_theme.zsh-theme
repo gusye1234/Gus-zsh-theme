@@ -1,18 +1,20 @@
 function conda_info {
     if [[ -n "$CONDA_DEFAULT_ENV" ]]; then
-        echo "%{$fg[green]%} ‹${CONDA_DEFAULT_ENV}›%{$reset_color%}"
+        echo "%{$fg[green]%}‹${CONDA_DEFAULT_ENV}›%{$reset_color%}"
     fi
 }
 
-PROMPT="${FG[237]}\${(l.\${COLUMNS}..·.)}%{$reset_color%}"
+# PROMPT="${FG[237]}\${(l.\${COLUMNS}..·.)}%{$reset_color%}"
 # content around '' is updated every time, but around "" is not
-PROMPT+='
-%{$fg_bold[cyan]%}·%{$reset_color%} %{$fg[magenta]%}%c%{$reset_color%}$(git_prompt_info)$(conda_info)
-%(?:%{$fg_bold[green]%}↪ :%{$fg_bold[red]%}↪ )%{$reset_color%}'
+PROMPT='
+%{$fg_bold[cyan]%}·%{$reset_color%} %{$fg[magenta]%}%2d%{$reset_color%} $(git_prompt_info)$(conda_info)
+%(?:%{$fg_bold[green]%}〉:%{$fg_bold[red]%}〉)%{$reset_color%}'
 
+
+# %(?:%{$fg_bold[green]%}↪ :%{$fg_bold[red]%}↪ )%{$reset_color%}
 # magenta
-ZSH_THEME_GIT_PROMPT_PREFIX=" %{$fg[green]%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[green]%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%} "
 
 # Enable command search with Up and Down arrow key
 autoload -U up-line-or-beginning-search
@@ -37,7 +39,9 @@ zle-line-init() {
 
     local saved_prompt=$PROMPT
     local saved_rprompt=$RPROMPT
-    PROMPT='%(?:%{$fg[green]%}⑆ :%{$fg_bold[red]%}⑆ )%{$reset_color%}'
+    PROMPT="${FG[237]}\${(l.\${COLUMNS}..·.)}%{$reset_color%}"
+    PROMPT+='
+%(?:%{$fg[green]%}〉:%{$fg_bold[red]%}>> )%{$reset_color%}'
     RPROMPT=''
     zle .reset-prompt
     PROMPT=$saved_prompt
