@@ -1,4 +1,4 @@
-![](./demo.gif)
+![](./demo.png)
 
 Hackable OH-MY-ZSH theme with transient prompt. 
 
